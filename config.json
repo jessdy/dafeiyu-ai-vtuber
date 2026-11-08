@@ -8,7 +8,7 @@
   "api_ip": "127.0.0.1",
   "api_port": 8082,
   "platform": "dy",
-  "room_display_id": "278333",
+  "room_display_id": "849573825507",
   "chat_type": "chatgpt",
   "need_lang": "none",
   "before_prompt": "请用简洁自然的中文口语回应以下观众，通常二十到六十字。\n",
@@ -290,10 +290,10 @@
   "live2d": {
     "enable": true,
     "port": 12345,
-    "name": "大肥鱼"
+    "name": "Haru"
   },
   "openai": {
-    "api": "https://open.bigmodel.cn/api/paas/v4",
+    "api": "https://newapi.jessdy.com/v1",
     "api_key": [
       ""
     ]
@@ -305,7 +305,7 @@
     "speed": 1.0
   },
   "chatgpt": {
-    "model": "glm-4.7-flash",
+    "model": "gpt-6-luna",
     "temperature": 0.9,
     "max_tokens": 4096,
     "top_p": 1.0,
@@ -431,7 +431,7 @@
     "stream": true
   },
   "custom_llm": {
-    "url": "http://127.0.0.1:11434/v1/chat/completions",
+    "url": "https://newapi.jessdy.com/v1/chat/completions",
     "headers": "Content-Type:application/json\nAuthorization:Bearer sk",
     "method": "POST",
     "proxies": "{}",
@@ -462,7 +462,7 @@
       "similarity": 0.5
     }
   },
-  "audio_synthesis_type": "fish_audio",
+  "audio_synthesis_type": "edge-tts",
   "audio_random_speed": {
     "normal": {
       "enable": false,
@@ -564,10 +564,10 @@
   },
   "openai_tts": {
     "type": "api",
-    "api_ip_port": "https://api.openai.com/v1",
+    "api_ip_port": "https://newapi.jessdy.com/v1",
     "model": "tts-1",
     "voice": "nova",
-    "api_key": "你的openai api key"
+    "api_key": ""
   },
   "gradio_tts": {
     "request_parameters": "{{\"url\": \"https://xzjosh-nana7mi-bert-vits2.hf.space/--replicas/b9be4/\", \"fn_index\": 0, \"data_analysis\": 1, \"text_input\": \"{content}\", \"speaker_option\": \"Nana7mi\", \"sdp_ratio\": 0.5, \"noise\": 0.6, \"noise_w\": 0.9, \"length\": 1}}"
@@ -795,7 +795,7 @@
   "talk": {
     "key_listener_enable": false,
     "direct_run_talk": false,
-    "device_index": "1",
+    "device_index": "",
     "no_recording_during_playback": true,
     "no_recording_during_playback_sleep_interval": 1.0,
     "username": "主人",

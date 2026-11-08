@@ -283,8 +283,8 @@ html,body{background:#f1f5f9;}
 .q-tab-panel > .q-card{width:100%;}
 /* 提示条：原先三处写死 Tailwind 的 bg-blue-100，换深色主题就成了一块突兀的浅蓝。
    半透明白底 + 左侧色条，在渐变背景和卡片上都读得清 */
-.tip-bar{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.72);
-         border-left:3px solid #2f6fad;box-shadow:0 1px 3px rgba(0,0,0,0.10);
+.tip-bar{padding:8px 12px;border-radius:10px;background:rgba(255,255,255,0.72);
+         border-left:3px solid #2f6fad;box-shadow:0 1px 3px rgba(15,23,42,0.10);
          font-size:13px;line-height:1.6;color:#1f3552;}
 /* 字段宽度 token（走查 audit-13）：实测全站 26 种内联像素宽度（200×248、100×188、153×70、
    300×99…），同一含义的字段在不同页宽度不一样、同一张卡里相邻两行也对不齐。
@@ -369,6 +369,39 @@ html,body{background:#f1f5f9;}
 .q-tab-panel .q-expansion-item {
   scroll-margin-top: 85px;
 }
+
+/* ===== 整体视觉打磨层（美化）：只加圆角/阴影/过渡/悬停等质感，
+   不动主题背景色——卡片与面板的底色仍由主题内联样式决定，5 套主题都不受影响 ===== */
+/* 平滑滚动：跳转字段、回到顶部不再生硬跳动 */
+html{scroll-behavior:smooth;}
+/* 卡片：统一圆角与柔和阴影，悬停时投影加深一点点，页面立刻有层次（背景色仍归主题管） */
+.q-tab-panel .q-card{border-radius:12px;
+  box-shadow:0 1px 2px rgba(15,23,42,0.06),0 3px 12px rgba(15,23,42,0.08);
+  transition:box-shadow .18s ease;}
+.q-tab-panel .q-card:hover{box-shadow:0 2px 4px rgba(15,23,42,0.08),0 6px 20px rgba(15,23,42,0.12);}
+/* 按钮：统一圆角；底栏操作条按钮加轻投影，浮在内容上更清楚 */
+.q-tab-panel .q-btn{border-radius:8px;transition:box-shadow .15s ease,opacity .15s ease;}
+.q-page-sticky .q-btn{border-radius:8px;box-shadow:0 2px 8px rgba(15,23,42,0.18);}
+/* 输入控件：圆角从 Quasar 默认 4px 提到 8px，与按钮、卡片同一套圆角语言 */
+.q-tab-panel .q-field .q-field__control{border-radius:8px;}
+/* 下拉菜单与对话框：跟随卡片语言（圆角 + 投影），原生的直角硬边看起来像另一个系统 */
+.q-menu,.q-dialog .q-card{border-radius:10px;}
+.q-menu{box-shadow:0 4px 24px rgba(15,23,42,0.16);}
+/* 顶部工作区导航条：半透明白胶囊，浮在浅灰画布上多一层质感；
+   背景是样式表给的，不会覆盖 mark() 写在芯片上的选中色 */
+.luna-nav{background:rgba(255,255,255,0.60);border-radius:12px;
+          box-shadow:0 1px 3px rgba(15,23,42,0.08);backdrop-filter:blur(6px);
+          -webkit-backdrop-filter:blur(6px);}
+/* 芯片悬停反馈：用内阴影着色而不是换背景色——mark() 给选中芯片写的是内联 background，
+   样式表换背景要么被内联压掉、要么带 !important 误伤选中态；
+   内阴影叠在透明/选中色上都成立，两全 */
+.luna-nav .q-btn:hover,
+.section-index .q-btn:hover{box-shadow:inset 0 0 0 999px rgba(15,23,42,0.08);}
+/* 滚动条：Windows 默认的宽滚动条很突兀，改细 + 半透明，悬停加深 */
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-thumb{background:rgba(100,116,139,0.35);border-radius:8px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(100,116,139,0.55);}
+::-webkit-scrollbar-track{background:transparent;}
 </style>
 <script>
 (function () {

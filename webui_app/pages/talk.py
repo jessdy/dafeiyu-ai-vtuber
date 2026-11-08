@@ -43,10 +43,16 @@ def build_talk_tab(config, common, state, card_css, switch_internal_css,
             logger.info(f"声卡输入设备={audio_device_info_list}")
             audio_device_info_dict = {str(device['device_index']): device['device_info'] for device in audio_device_info_list}
 
+            # 配置里存的设备可能不在当前枚举结果里（无声卡、设备被拔掉），
+            # 不兜住的话 nicegui 会抛 ValueError，整个 WebUI 都打不开
+            talk_device_index_value = str(config.get("talk", "device_index"))
+            if talk_device_index_value not in audio_device_info_dict:
+                talk_device_index_value = None
+
             select_talk_device_index = ui.select(
                 label='声卡输入设备',
                 options=audio_device_info_dict,
-                value=config.get("talk", "device_index")
+                value=talk_device_index_value
             ).style("width:300px;").tooltip('这就是语言对话输入的声卡（麦克风），选择你对应的麦克风即可，如果需要监听电脑声卡可以配合虚拟声卡来实现')
 
             switch_talk_no_recording_during_playback = ui.switch('播放中不进行录音', value=config.get("talk", "no_recording_during_playback")).style(switch_internal_css).tooltip('AI在播放音频的过程中不进行录音，从而防止麦克风和扬声器太近导致的循环录音的问题')
